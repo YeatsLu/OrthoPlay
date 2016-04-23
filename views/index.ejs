@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Webgl</title>
+  <link rel="stylesheet" href="/static/css/bootstrap.css">
+  <link rel="stylesheet" href="/static/css/index.css">
+  <script src="/static/js/lib/three.js"></script>
+  <script src="/static/js/lib/OrbitControls.js"></script>
+  <script src="/static/js/lib/STLLoader.js"></script>
+  <script src="/static/js/lib/jquery-1.11.3.js"></script>
+  <script src="/static/js/lib/bootstrap.js"></script>
+  <script src="/static/js/biz/index.js"></script>
+  <!--<script src="/static/js/biz/test.js"></script>-->
+
+</head>
+
+<body>
+<div class="container-fluid" style="margin-top: 10px;">
+
+  <!--<input type="text" class="form-control" style="margin-bottom: 10px;">-->
+  <div class="col-lg-3 col-md-3">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h2 class="panel-title">Control</h2></div>
+      <div class="panel-body">
+        <div class="text-center">
+          <button class="btn btn-default" id="reset" style="width: 100%; height: 35px; font-size: 18px;"><span class="glyphicon glyphicon-repeat"></span> Reset</button>
+        </div>
+        <div class="text-center">
+          <button class="btn btn-default btn-sq" id="prevStep"><span class="glyphicon glyphicon-step-backward"></span></button>
+          <button class="btn btn-default btn-circle btn-lg" id="play" style="margin: 10px 30px;"><span class="glyphicon glyphicon-pause"></span></button>
+          <button class="btn btn-default btn-sq" id="nextStep"><span class="glyphicon glyphicon-step-forward"></span></button>
+        </div>
+        <div class="input-group" style="margin-left: auto;">
+          <div class="input-group-addon">Speed</div>
+          <input type="text" class="form-control" id="threshold" placeholder="current: 100">
+          <div class="input-group-btn">
+            <button class="btn btn-default" id="refresh">Refresh</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h2 class="panel-title pull-left">Comment</h2>
+        <button class="btn btn-default pull-right" id="submit">Submit</button>
+        <div class="clearfix"></div>
+      </div>
+      <div class="panel-body">
+        <div class="form-group">
+          <div class="input-group">
+            <input type="text" class="form-control" disabled id="pick">
+            <div class="input-group-btn">
+              <button class="btn btn-default" id="save">Staged</button>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <textarea class="form-control" style="height: 220px; overflow: auto;" id="textarea"></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-9 col-md-9">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h2 class="panel-title pull-left">OrthoPlay</h2>
+        <div class="btn-group pull-right">
+          <button class="btn btn-default" style="margin-left: 20px;" id="singleTooth">单牙</button>
+        </div>
+        <div class="btn-group pull-right">
+          <button class="btn btn-primary" style="margin-left: 20px;" id="gum">牙龈</button>
+        </div>
+        <div class="btn-group pull-right" style="margin-left: 20px;">
+          <button class="btn btn-primary" id="jawUpper">上颌</button>
+          <button class="btn btn-primary" id="jawLower">下颌</button>
+        </div>
+        <div class="btn-group pull-right" id="viewSwicher">
+          <button class="btn btn-primary" data-view="front">正视</button>
+          <button class="btn btn-default" data-view="left">左视</button>
+          <button class="btn btn-default" data-view="right">右视</button>
+          <button class="btn btn-default" data-view="back">后视</button>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+      <div class="progress" style="border-radius: 0; margin-bottom: 0px; display: none;" id="progress">
+        <div class="progress-bar active" style="width: 0%;"></div>
+      </div>
+      <div class="panel-body" id="scene">
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="prompt">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Prompt</h4>
+        </div>
+        <div class="modal-body"></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
