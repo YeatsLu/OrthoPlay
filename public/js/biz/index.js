@@ -87,8 +87,10 @@ $(function () {
     //});
 
 
-    $.get('/play/treatments', function (treatments) {
-        var treatment = treatments[0];
+    $.get('/play/treatments', function (treatment) {
+        // var treatment = treatments[0];
+        // 
+        console.log(treatment);
 
         loading.all = treatment.toothPlay.length + treatment.frameNum * 2;
         loading.tooth = treatment.toothPlay.length;
@@ -116,6 +118,8 @@ $(function () {
 
         // Load tooth
         treatment.toothPlay.forEach(function (tooth) {
+            if ( !tooth ) return;
+
             var rotation = tooth.rotation.split(' '),
                 translation = tooth.translation.split(' '),
                 matched = regExName.exec(tooth.name)[0]
@@ -138,6 +142,10 @@ $(function () {
             (function (i) {
                 loader.load(treatment.jawLowerPath + 'Tooth_LowerJaw_' + i + '.stl', function (g) {
                     var mesh = new THREE.Mesh(g, jawMaterial);
+
+                    mesh.geometry.computeVertexNormals();
+                    mesh.geometry.computeFaceNormals();
+
                     mesh.name = 'JawLower_' + i;
                     mesh.visible = false;
                     mesh.userData = undefined;
@@ -158,6 +166,10 @@ $(function () {
                 });
                 loader.load(treatment.jawUpperPath + 'Tooth_UpperJaw_' + i + '.stl', function (g) {
                     var mesh = new THREE.Mesh(g, jawMaterial);
+
+                    mesh.geometry.computeVertexNormals();
+                    mesh.geometry.computeFaceNormals();
+
                     mesh.name = 'JawUpper_' + i;
                     mesh.visible = false;
                     mesh.userData = undefined;
@@ -250,14 +262,23 @@ $(function () {
             if (intersects.length > 0 && intersects[0].object instanceof THREE.Mesh
                 && intersects[0].object.userData) {
 
-                toothMeshList.list.forEach(function(v) {
-                    v.mesh.material.color = toothMaterialColor.init;
-                });
-                toothMeshList.current = intersects[0].object;
-                toothMeshList.current.material.color = toothMaterialColor.now;
+                if ( toothMeshList.current === intersects[ 0 ].object ) {
+                    if ( toothMeshList.current.material.color === toothMaterialColor.init ) {
+                        toothMeshList.current.material.color = toothMaterialColor.now;
+                    } else {
+                        toothMeshList.current.material.color = toothMaterialColor.init
+                    }
+                } else {
+                    toothMeshList.list.forEach(function(v) {
+                        v.mesh.material.color = toothMaterialColor.init;
+                    });
+                    toothMeshList.current = intersects[0].object;
+                    toothMeshList.current.material.color = toothMaterialColor.now;
 
-                pickDiv.val(toothMeshList.current.userData.tooth.name);
-                textareaDiv.val(toothMeshList.current.userData.tooth.comment);
+                    pickDiv.val(toothMeshList.current.userData.tooth.name);
+                    textareaDiv.val(toothMeshList.current.userData.tooth.comment);
+                }
+
                 mouse.set(-1, -1);
             }
         }

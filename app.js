@@ -3,7 +3,7 @@ var express = require("express"),
 
 var app = express();
 
-var playController = require('./controller/PlayController');
+var playController = require('./routes/PlayController');
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');

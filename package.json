@@ -11,9 +11,6 @@
   "dependencies": {
     "body-parser": "^1.15.0",
     "ejs": "^2.4.1",
-    "express": "^4.13.4",
-    "mkdirp": "^0.5.1",
-    "mysql": "^2.10.2",
-    "uuid": "^2.0.2"
+    "express": "^4.13.4"
   }
 }

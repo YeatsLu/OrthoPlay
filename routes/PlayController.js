@@ -1,7 +1,7 @@
 /**
  * Created by LVZY on 2016/4/12.
  */
-var OrthoService = require('../service/OrthoService');
+var OrthoService = require('./OrthoService');
 
 var express = require('express');
 var router = express.Router();
@@ -15,9 +15,7 @@ router.get('/treatments', function (req, res) {
 });
 
 router.post('/tooth', function(req, res) {
-    OrthoService.updateToothPlay(req.body.arr, function(result) {
-        res.json(result);
-    })
+    // TODO
 });
 
 router.post('/upload', function (req, res) {
@@ -27,6 +25,5 @@ router.post('/upload', function (req, res) {
 router.get('/test', function (req, res) {
     res.send('play-test');
 });
-
 
 module.exports = router;
